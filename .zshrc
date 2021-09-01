@@ -25,6 +25,10 @@ zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p
 zstyle ':completion:*' menu yes select
 # End of lines added by compinstall
 
+#DOTNET
+    export PATH=$PATH:$HOME/dotnet
+    export DOTNET_ROOT=$HOME/dotnet
+
 #Keybinds
     bindkey  "^[[H"   beginning-of-line
     bindkey  "^[[F"   end-of-line
