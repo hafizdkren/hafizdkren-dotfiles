@@ -18,6 +18,11 @@ zstyle :compinstall filename '/home/hafizdkren/.zshrc'
 autoload -Uz compinit promptinit
 compinit -i
 promptinit
+
+zstyle ':completion:*:*:cd:*' menu yes select
+zstyle ':completion:*' format 'Completing %d'
+zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s%p
+zstyle ':completion:*' menu yes select
 # End of lines added by compinstall
 
 #Keybinds
@@ -29,6 +34,10 @@ promptinit
     bindkey "^[[3;5~" delete-word
     bindkey  "^[[5~"  up-line
     bindkey  "^[[6~"  down-line
+    bindkey -s '^ ' ' gh pr status && gh issue status'
+    bindkey   '^M'    autosuggest-execute
+    bindkey  '^[[3~'  delete-char
+
 
 #compdef _gh gh
 
