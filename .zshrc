@@ -25,6 +25,10 @@ zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p
 zstyle ':completion:*' menu yes select
 # End of lines added by compinstall
 
+#SSH-GPG Automate
+    export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+    gpgconf --launch gpg-agent
+
 #DOTNET
     export PATH=$PATH:$HOME/dotnet
     export DOTNET_ROOT=$HOME/dotnet
