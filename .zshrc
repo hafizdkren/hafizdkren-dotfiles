@@ -32,8 +32,8 @@ zstyle ':completion:*' menu yes select
     gpgconf --launch gpg-agent
 
 #DOTNET
-    export PATH=$PATH:$HOME/dotnet
-    export DOTNET_ROOT=$HOME/dotnet
+    export PATH=$PATH:$HOME/.dotnet
+    export DOTNET_ROOT=$HOME/.dotnet
 
 #Keybinds
     bindkey  "^[[H"   beginning-of-line
