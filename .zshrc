@@ -749,6 +749,7 @@ done
 }
 
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+source ~/.zsh/zsh-completions/zsh-completions.plugin.zsh
 
 # To easily setting up P10K, you should build from from GH,
 # Link to P10K Installations : https://github.com/romkatv/powerlevel10k
