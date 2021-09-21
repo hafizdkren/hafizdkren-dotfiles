@@ -6,6 +6,14 @@
 super + Return
 	/bin/kitty
 
+# vscode
+super + c
+	/bin/code
+
+# GIMP
+super + g
+	/bin/gimp
+
 # program launcher
 super + d
 	rofi -modi drun -show drun -line-padding 4 \
@@ -53,7 +61,7 @@ super + y
 	bspc node newest.marked.local -n newest.!automatic.local
 
 # swap the current node and the biggest window
-super + g
+super + shift + g
 	bspc node -s biggest.window
 
 #
