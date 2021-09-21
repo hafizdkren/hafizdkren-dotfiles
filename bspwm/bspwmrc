@@ -2,21 +2,40 @@
 
 pgrep -x sxhkd > /dev/null || sxhkd &
 
-bspc monitor -d I II III IV VI VII X
-    # I II III IV V VI VII VIII IX X
+# I want to making these setup is not only dynamic but also understandable.
+bspc monitor -d I II III IV V VI VII VIII IX X XI XII XIII XIV
+#bspc monitor -d O
 
 bspc config border_width         1
 bspc config window_gap           8
 
-bspc config split_ratio          0.52
+bspc config split_ratio          0.50
 bspc config borderless_monocle   true
 bspc config gapless_monocle      true
 bspc config pointer_follows_focus false
-bspc config focus_follows_pointer true
+bspc config focus_follows_pointer false
+bspc config click_to_focus        true
 
-bspc rule -a Gimp desktop='^8' state=floating follow=on
+# Applications
+bspc rule -a Bitwarden desktop'^1'
+bspc rule -a "Authy Desktop" desktop='^1'
 bspc rule -a firefox desktop='^2'
-bspc rule -a Visual Studio Code desktop='^4'
+bspc rule -a kitty desktop='^3'
+bspc rule -a Code desktop='^4'
+bspc rule -a Blender desktop='^5'
+bspc rule -a Gimp-2.10 desktop='^6' state=floating follow=on
+bspc rule -a notion-app-enhanced desktop='^7'
+bspc rule -a Joplin desktop='^7'
+bspc rule -a Godot desktop='^8'
+bspc rule -a Thunar desktop='^9'
+bspc rule -a discord desktop='^10'
+bspc rule -a Ferdi desktop='^11'
+bspc rule -a obs desktop='^12'
+bspc rule -a Steam desktop='^13'
+bspc rule -a Lutris desktop='^13'
+bspc rule -a Spotify desktop='^14'
+
+# Additional rules
 bspc rule -a mplayer2 state=floating
 bspc rule -a Yad state=floating
 bspc rule -a Kupfer.py focus=on

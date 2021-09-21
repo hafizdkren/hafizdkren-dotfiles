@@ -6,14 +6,6 @@
 super + Return
 	/bin/kitty
 
-# vscode
-super + c
-	/bin/code
-
-# GIMP
-super + g
-	/bin/gimp
-
 # program launcher
 super + d
 	rofi -modi drun -show drun -line-padding 4 \
@@ -94,7 +86,7 @@ super + {_,shift + }c
 
 # focus the next/previous desktop in the current monitor
 super + bracket{left,right}
-	bspc desktop -f {prev,next}.local
+	bspc desktop -f {prev,next}.occupied
 
 # focus the last desktop/node
 super + {grave,Tab}
@@ -107,8 +99,8 @@ super + {o,i}
 	bspc wm -h on
 
 # focus or send to the given desktop
-super + {_,shift + }{1-9,0}
-	bspc {desktop -f,node -d} '^{1-9,10}'
+super + {_,shift + }{1-9,0,11-19}
+	bspc {desktop -f,node -d} '^{1-9,10,11-19}'
 
 #
 # preselect
@@ -180,11 +172,17 @@ super+Print
   ~/.config/bspwm/scripts/screenshot.sh
 
 # Shortcuts
+#	Firefox
 super + w 
   firefox
 
+#	File Explorer
 super + n 
   thunar  
+
+# 	GIMP
+super + g
+	gimp
 
 super + F1
   ~/.config/bspwm/scripts/keybindings_rofi.sh
