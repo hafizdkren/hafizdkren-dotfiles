@@ -24,6 +24,7 @@ bspc rule -a kitty desktop='^3'
 bspc rule -a Code desktop='^4'
 bspc rule -a Blender desktop='^5'
 bspc rule -a Gimp-2.10 desktop='^6' state=floating follow=on
+bspc rule -a Olive desktop='^6'
 bspc rule -a notion-app-enhanced desktop='^7'
 bspc rule -a Joplin desktop='^7'
 bspc rule -a Godot desktop='^8'
