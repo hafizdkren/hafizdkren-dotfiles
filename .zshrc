@@ -753,9 +753,23 @@ source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 # To easily setting up P10K, you should build from from GH,
 # Link to P10K Installations : https://github.com/romkatv/powerlevel10k
 
-source ~/.powerlevel10k/powerlevel10k.zsh-theme
+source ~/.zsh/powerlevel10k/powerlevel10k.zsh-theme
 
-#   source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
 #   
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 #   [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# This plugins just a additional for my Github account settings.
+
+source ~/.zsh/zgen/zgen.zsh
+
+# I think I'll using wakatime omz version, since it's bit easy to adding rather had lot of trouble
+# But because the nature of omz is still unknown while I'm installing P10K via manual (Thanks), it's saving from
+# lot of additional junk IDNI, so, I'm using zgen since it's easier to dealt with.
+
+# Sorry if this config also had some junk in it.
+
+#source ~/.zsh/wakatime-zsh-plugin/wakatime-plugin.zsh
