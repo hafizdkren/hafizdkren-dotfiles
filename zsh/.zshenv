@@ -3,7 +3,7 @@
 	export EDITOR='nvim'
 	export VISUAL='nvim'
 	export DIFFPROG='nvim -d'
-    fastfetch && octofetch hafizdkren
+    fastfetch
 
 # Adding XDG and Bin
 #XDG
