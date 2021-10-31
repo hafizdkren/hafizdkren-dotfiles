@@ -32,9 +32,12 @@ bspc rule -a Thunar desktop='^9'
 bspc rule -a discord desktop='^10'
 bspc rule -a Ferdi desktop='^11'
 bspc rule -a obs desktop='^12'
+bspc rule -a Shotcut desktop='^12'
 bspc rule -a Steam desktop='^13'
 bspc rule -a Lutris desktop='^13'
+bspc rule -a dotnet desktop='^13'
 bspc rule -a Spotify desktop='^14'
+bspc rule -a spotify desktop='^14'
 
 # Additional rules
 bspc rule -a mplayer2 state=floating
