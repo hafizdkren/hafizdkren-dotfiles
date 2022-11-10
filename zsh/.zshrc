@@ -5,6 +5,8 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+#	typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
+
 #SSH-GPG Automate
 	export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
 	gpgconf --launch gpg-agent
@@ -46,21 +48,23 @@ source ~/.zsh/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
 source ~/.zsh/keybinds/keybinds.zsh
 
 #wakatime
-source ~/.zsh/wakatime-zsh-plugin/wakatime-plugin.zsh
+#source ~/.zsh/wakatime-zsh-plugin/wakatime-plugin.zsh
 
 #VScode
-source ~/.zsh/vscode/vscode.zsh
+#source ~/.zsh/vscode/vscode.zsh
 
 #Github CLI
-source ~/.zsh/github-cli/github-cli.zsh
+#source ~/.zsh/github-cli/github-cli.zsh 
 
 #ZSH Autosuggestions
-source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+#source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+## Setup to machine location...
+source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 #Powerlevel10k
 # To easily setting up P10K, you should build from from GH,
 # Link to P10K Installations : https://github.com/romkatv/powerlevel10k
-source ~/.zsh/powerlevel10k/powerlevel10k.zsh-theme
+source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
