@@ -1,0 +1,3 @@
+[submodule "nvim/neovim-lua"]
+	path = nvim/neovim-lua
+	url = git@github.com:brainfucksec/neovim-lua.git
