@@ -3,11 +3,11 @@
 pgrep -x sxhkd > /dev/null || sxhkd &
 
 # I want to making these setup is not only dynamic but also understandable.
-bspc monitor -d I II III IV V VI VII VIII IX X XI XII XIII XIV
+bspc monitor -d I II III IV V VI VII VIII IX X
 #bspc monitor -d O
 
 bspc config border_width         1
-bspc config window_gap           8
+bspc config window_gap           4
 
 bspc config split_ratio          0.50
 bspc config borderless_monocle   true
