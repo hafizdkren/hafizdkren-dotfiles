@@ -3,49 +3,34 @@
 -----------------------------------------------------------
 
 -- Plugin: nvim-cmp
--- https://github.com/hrsh7th/nvim-cmp
+-- url: https://github.com/hrsh7th/nvim-cmp
 
-local cmp = require 'cmp'
-local luasnip = require 'luasnip'
-local tabnine = require 'cmp_tabnine.config'
-local autopairs = require 'nvim-autopairs.completion.cmp'
+
+local cmp_status_ok, cmp = pcall(require, 'cmp')
+if not cmp_status_ok then
+  return
+end
+
+local luasnip_status_ok, luasnip = pcall(require, 'luasnip')
+if not luasnip_status_ok then
+  return
+end
 
 cmp.setup {
-  -- load snippet support
+  -- Load snippet support
   snippet = {
     expand = function(args)
       luasnip.lsp_expand(args.body)
     end,
-},
+  },
 
-tabnine:setup {
-        max_lines = 1000;
-        max_num_results = 20;
-        sort = true;
-	run_on_every_keystroke = true;
-	snippet_placeholder = '..';
-},
-
-autopairs.setup {
-    map_cr = true,          -- map <CR> on insert mode
-    map_complete = true,    -- it will auto insert '(' (map_char) after select function or method item
-    auto_select = true,     -- automatically select the first item
-    insert = false,         -- use insert confirm behavior instead of replace
-    map_char = {            -- modifies the functionor method delimiter by filetypes
-        all = '(',
-        tex = '{',
-        html = '<'
-    }
-},
-
--- completion settings
+-- Completion settings
   completion = {
-    -- completeopt = 'menu,menuone,noselect'
-    completeopt = 'menu,menuone,noselect',
+    --completeopt = 'menu,menuone,noselect'
     keyword_length = 2
   },
 
-  -- key mapping
+  -- Key mapping
   mapping = {
     ['<C-n>'] = cmp.mapping.select_next_item(),
     ['<C-p>'] = cmp.mapping.select_prev_item(),
@@ -58,7 +43,7 @@ autopairs.setup {
       select = true,
     },
 
--- Tab mapping
+    -- Tab mapping
     ['<Tab>'] = function(fallback)
       if cmp.visible() then
         cmp.select_next_item()
@@ -68,7 +53,6 @@ autopairs.setup {
         fallback()
       end
     end,
-
     ['<S-Tab>'] = function(fallback)
       if cmp.visible() then
         cmp.select_prev_item()
@@ -80,12 +64,12 @@ autopairs.setup {
     end
   },
 
-  -- load sources, see: https://github.com/topics/nvim-cmp
+  -- Load sources, see: https://github.com/topics/nvim-cmp
   sources = {
     { name = 'nvim_lsp' },
     { name = 'luasnip' },
     { name = 'path' },
     { name = 'buffer' },
-    { name = 'cmp_tabnine'},
   },
 }
+

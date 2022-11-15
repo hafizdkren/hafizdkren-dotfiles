@@ -1,36 +1,26 @@
------------------------------------------------------------
+----------------------------------------------------------
 -- Statusline configuration file
 -----------------------------------------------------------
 
---[[
+-- Plugin: feline.nvim
+-- url: https://github.com/feline-nvim/feline.nvim
 
-Plugin: feline.nvim
-https://github.com/famiu/feline.nvim
+-- For the configuration see the Usage section:
+-- https://github.com/feline-nvim/feline.nvim/blob/master/USAGE.md
 
-For the configuration see the Usage section:
-https://github.com/famiu/feline.nvim/blob/master/USAGE.md
+-- Thanks to ibhagwan for the example to follow:
+-- https://github.com/ibhagwan/nvim-lua
 
-Thanks to ibhagwan for the example to follow:
-https://github.com/ibhagwan/nvim-lua
+local status_ok, feline = pcall(require, 'feline')
+if not status_ok then
+  return
+end
 
---]]
-
-
-local colors = {
-  bg = '#1d1f22',
-  fg = '#f8f8f0',
-  yellow = '#e6db74',
-  cyan = '#78dce8',
-  blue = '#27406b',
-  green = '#a6e22e',
-  orange = '#fa8419',
-  violet = '#9c64fe',
-  pink = '#f92672',
-  red = '#e95678',
-}
+-- Set colorscheme (from core/colors.lua/colorscheme_name)
+local colors = require('core/colors').onedark_dark
 
 local vi_mode_colors = {
-  NORMAL = colors.pink,
+  NORMAL = colors.cyan,
   INSERT = colors.green,
   VISUAL = colors.yellow,
   OP = colors.cyan,
@@ -39,23 +29,28 @@ local vi_mode_colors = {
   ['V-REPLACE'] = colors.red,
   ENTER = colors.orange,
   MORE = colors.orange,
-  SELECT = colors.pink,
-  COMMAND = colors.cyan,
-  SHELL = colors.cyan,
-  TERM = colors.green,
-  NONE = colors.blue
+  SELECT = colors.yellow,
+  COMMAND = colors.pink,
+  SHELL = colors.pink,
+  TERM = colors.pink,
+  NONE = colors.yellow,
 }
 
-local lsp = require('feline.providers.lsp')
-local vi_mode_utils = require('feline.providers.vi_mode')
+-- Providers (LSP, vi_mode)
+local lsp = require 'feline.providers.lsp'
+local vi_mode_utils = require 'feline.providers.vi_mode'
 
+-- LSP diagnostic
 local lsp_get_diag = function(str)
-  local count = vim.lsp,diagnostic.get_count(0, str)
+  local count = vim.lsp.diagnostic.get_count(0, str)
   return (count > 0) and ' '..count..' ' or ''
 end
 
+local separator = '|'
+
 -- My components
 local comps = {
+  -- vi_mode -> NORMAL, INSERT..
   vi_mode = {
     left = {
       provider = function()
@@ -67,29 +62,47 @@ local comps = {
           name = vi_mode_utils.get_mode_highlight_name(),
           fg = colors.bg,
           bg = vi_mode_utils.get_mode_color(),
-          style = 'bold'
+          style = 'bold',
         }
         return set_color
       end,
       left_sep = ' ',
-      right_sep = ' '
+      right_sep = ' ',
     }
   },
+  -- Parse file information:
   file = {
+    -- File name
     info = {
       provider = {
         name = 'file_info',
         opts = {
           type = 'relative',
-          file_modified_icon = ''
+          file_modified_icon = '',
         }
       },
       hl = { fg = colors.cyan },
       icon = '',
     },
-  type = {
-      provider = { name = 'file_type' },
+    -- File type
+    type = {
+      provider = function()
+        local type = vim.bo.filetype:lower()
+        local extension = vim.fn.expand '%:e'
+        local icon = require('nvim-web-devicons').get_icon(extension)
+        if icon == nil then
+          icon = ' '
+        end
+        return ' ' .. icon .. ' ' .. type
+      end,
+      hl = { fg = colors.fg },
+      left_sep = {
+        str = ' ' .. separator,
+        hl = { fg = colors.fg },
+      },
+      righ_sep = ' ',
     },
+    -- Operating system
     os = {
       provider = function()
         local os = vim.bo.fileformat:lower()
@@ -104,43 +117,54 @@ local comps = {
         return icon .. os
       end,
       hl = { fg = colors.fg },
-      left_sep = ' ',
-      right_sep = ' '
+      left_sep = {
+        str = ' ' .. separator,
+        hl = { fg = colors.fg },
+      },
+      right_sep = {
+        str = ' ' .. separator,
+        hl = { fg = colors.fg },
+      },
     },
+    -- Line-column
+    position = {
+      provider = { name = 'position' },
+      hl = {
+        fg = colors.fg,
+        style = 'bold',
+      },
+      left_sep = ' ',
+      right_sep = ' ',
+    },
+    -- Cursor position in %
     line_percentage = {
       provider = { name = 'line_percentage' },
       hl = {
-        fg = colors.pink
+        fg = colors.cyan,
+        style = 'bold',
       },
       left_sep = ' ',
-      right_sep = ' '
-    },
-    position = {
-      provider = {name = 'position'},
-      hl = {
-        fg = colors.cyan,
-        style = 'bold'
-      },
       right_sep = ' ',
     },
+    -- Simple scrollbar
     scroll_bar = {
       provider = { name = 'scroll_bar' },
-      hl = { fg = colors.green },
+      hl = { fg = colors.fg },
       left_sep = ' ',
-      right_sep = ' '
+      right_sep = ' ',
     },
   },
   -- LSP info
   diagnos = {
     err = {
       provider = 'diagnostic_errors',
-      icon = '⚠ ',
+      icon = ' ',
       hl = { fg = colors.red },
-      left_sep = ' ',
+      left_sep = '  ',
     },
     warn = {
       provider = 'diagnostic_warnings',
-      icon = ' ',
+      icon = ' ' ,
       hl = { fg = colors.yellow },
       left_sep = ' ',
     },
@@ -152,7 +176,7 @@ local comps = {
     },
     hint = {
       provider = 'diagnostic_hints',
-      icon = ' ',
+      icon = ' ',
       hl = { fg = colors.cyan },
       left_sep = ' ',
     },
@@ -163,6 +187,7 @@ local comps = {
       icon = '  ',
       hl = { fg = colors.pink },
       left_sep = '  ',
+      right_sep = ' ',
     }
   },
   -- git info
@@ -178,7 +203,6 @@ local comps = {
       icon = '  ',
       hl = { fg = colors.green },
       left_sep = ' ',
-
     },
     change = {
       provider = 'git_diff_changed',
@@ -195,6 +219,8 @@ local comps = {
   }
 }
 
+-- Get active/inactive components
+-- See: https://github.com/feline-nvim/feline.nvim/blob/master/USAGE.md#components
 local components = {
   active = {},
   inactive = {},
@@ -220,24 +246,29 @@ table.insert(components.active[2], comps.diagnos.warn)
 table.insert(components.active[2], comps.diagnos.hint)
 table.insert(components.active[2], comps.diagnos.info)
 table.insert(components.active[2], comps.lsp.name)
+table.insert(components.active[2], comps.file.type)
 table.insert(components.active[2], comps.file.os)
-table.insert(components.active[2], comps.file.line_percentage)
 table.insert(components.active[2], comps.file.position)
+table.insert(components.active[2], comps.file.line_percentage)
 
-require('feline').setup {
-  colors = {
+-- Call feline
+feline.setup {
+  theme = {
     bg = colors.bg,
-    fg = colors.fg
+    fg = colors.fg,
   },
   components = components,
   vi_mode_colors = vi_mode_colors,
   force_inactive = {
     filetypes = {
-      'NvimTree',
-      'vista',
-      'term'
+      '^NvimTree$',
+      '^packer$',
+      '^vista$',
+      '^help$',
     },
-    buftypes = {},
+    buftypes = {
+      '^terminal$'
+    },
     bufnames = {},
   },
 }
