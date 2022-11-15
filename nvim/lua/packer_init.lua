@@ -123,6 +123,11 @@ return packer.startup(function(use)
     'lervag/vimtex'
   }
 
+  -- Discord Presence
+  use {
+    'andweeb/presence.nvim'
+  }
+
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
   if packer_bootstrap then
