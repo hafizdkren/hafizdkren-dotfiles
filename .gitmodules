@@ -1,0 +1,6 @@
+[submodule "submodule/neovim-lua"]
+	path = submodule/neovim-lua
+	url = git@github.com:brainfucksec/neovim-lua.git
+[submodule "submodule/fast-syntax-highlighting"]
+	path = submodule/fast-syntax-highlighting
+	url = git@github.com:zdharma-continuum/fast-syntax-highlighting.git
