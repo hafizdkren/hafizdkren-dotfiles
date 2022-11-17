@@ -1,6 +1,11 @@
 -- This plugins is adding from Brainfck nvim config just to make me understand the tabbing location.
 -- If you don't like it, just disable the plugins from plugins.lua or delete this file.
 
+local status_ok, indent_blankline = pcall(require, 'indent_blankline')
+if not status_ok then
+  return
+end
+
 -----------------------------------------------------------
 -- Neovim API aliases
 -----------------------------------------------------------
